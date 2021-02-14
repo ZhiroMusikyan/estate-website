@@ -90,6 +90,7 @@ export default function App() {
   function handleToggle() {
     setShowLogIn(!showLogIn);
   }
+
   return (
     <>
       <NavAppBar onClick={handleToggle} />
