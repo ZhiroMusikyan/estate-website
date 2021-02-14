@@ -1,7 +1,7 @@
 import React from "react";
 import  '../App.css'
 
-export default function LogInForm(props) {
+export default function LogIn(props) {
     function handleOnClick(event) {
         window.location = "/admin";
     }
@@ -11,7 +11,6 @@ export default function LogInForm(props) {
           <input type={"text"} placeholder={"email"}/>
           <input type={"password"} placeholder={"password"}/>
           <input type={"submit"}/>
-
       </div>
     </div>
   );
