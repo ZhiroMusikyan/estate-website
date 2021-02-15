@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import NavAppBar from "./components/AppNavBar";
 import {
   BrowserRouter as Router,
@@ -11,8 +11,9 @@ import LogInForm from "./components/LogInForm";
 import Admin from "./components/Admin";
 import User from "./components/User";
 import AddUser from "./components/AddUser";
-import firebase, { onLog } from "firebase";
 import SignUp from "./components/SignUp";
+import firebase from "firebase";
+
 
 // export default class App extends React.Component {
 //   constructor(props) {
@@ -86,7 +87,11 @@ import SignUp from "./components/SignUp";
 // }
 
 export default function App() {
-  const [showLogIn, setShowLogIn] = useState( false);
+  const [showLogIn, setShowLogIn] = useState(false);
+  useEffect(() => {
+    const db = firebase.database();
+    console.log('mydb',db);
+  });
   function handleToggle() {
     setShowLogIn(!showLogIn);
   }
@@ -94,9 +99,7 @@ export default function App() {
   return (
     <>
       <NavAppBar onClick={handleToggle} />
-      {showLogIn && (
-          <SignUp/>
-      )}
+      {showLogIn && <SignUp />}
     </>
   );
 }
