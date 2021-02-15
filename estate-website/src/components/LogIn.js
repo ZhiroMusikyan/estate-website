@@ -1,9 +1,12 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
-import { CreateUser } from "./Auth";
-import { useHistory } from "react-router-dom";
+import firebase from "firebase";
+import * as Auth from "./Auth";
+import { SignUp } from "./Auth";
+import { SignIn } from "./Auth";
+import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 
-export default function SignUp(props) {
+export default function LogIn(props) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState("");
@@ -15,10 +18,10 @@ export default function SignUp(props) {
     try {
       setError("");
       setLoading(true);
-      await CreateUser(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      await SignIn(emailRef.current.value, passwordRef.current.value);
+      history.push("/userpage");
     } catch {
-      setError("failed to create an account");
+      setError("failed to log in");
     }
     setLoading(false);
   }
@@ -32,7 +35,7 @@ export default function SignUp(props) {
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <Card>
             <Card.Body>
-              <h2 className="text-center mb-4">Sign Up</h2>
+              <h2 className="text-center mb-4">Log In</h2>
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
@@ -44,7 +47,7 @@ export default function SignUp(props) {
                   <Form.Control type="password" ref={passwordRef} required />
                 </Form.Group>
                 <Button desabled={loading} className="w-100" type="submit">
-                  Sign Up
+                  Log In
                 </Button>
               </Form>
             </Card.Body>

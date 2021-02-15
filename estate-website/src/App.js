@@ -11,9 +11,11 @@ import LogInForm from "./components/LogInForm";
 import Admin from "./components/Admin";
 import User from "./components/User";
 import AddUser from "./components/AddUser";
-import SignUp from "./components/SignUp";
+import LogIn from "./components/LogIn";
 import firebase from "firebase";
-
+import Dashboard from "./components/Dashboard";
+import SignUp from "./components/SignUp";
+import UserPage from "./components/UserPage";
 
 // export default class App extends React.Component {
 //   constructor(props) {
@@ -79,7 +81,7 @@ import firebase from "firebase";
 //       // </div>
 //         <>
 //           <NavAppBar/>
-//           <SignUp isLogIn ={true} />
+//           <LogIn isLogIn ={true} />
 //           {/*<LogInForm/>*/}
 //           </>
 //     );
@@ -98,8 +100,18 @@ export default function App() {
 
   return (
     <>
+      <Router>
       <NavAppBar onClick={handleToggle} />
-      {showLogIn && <SignUp />}
+          <LogIn />
+      {/*/!*<Dashboard/>*!/*/}
+
+      {/*  <Switch>*/}
+      {/*    <Route  path="/market" component={Dashboard}/>*/}
+      {/*    <Route path="/signup" component={SignUp}/>*/}
+      {/*    <Route path="/userpage" component={UserPage}/>*/}
+      {/*    <Redirect to="/market"/>*/}
+      {/*  </Switch>*/}
+      </Router>
     </>
   );
 }
