@@ -5,12 +5,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import {Link} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: 'blue',
+    backgroundColor: "blue",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -22,7 +22,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar(props) {
   const classes = useStyles();
+  const history = useHistory();
 
+  function handleLogIn(e) {
+    history.push("login");
+  }
   return (
     <div>
       <AppBar position="static" className={classes.root}>
@@ -37,8 +41,7 @@ export default function NavBar(props) {
           <Typography variant="h6" className={classes.title}>
             Estate Market:
           </Typography>
-          <Link to="login">Log in</Link>
-          {/*<Button color="inherit" onClick={props.onClick}>Log In</Button>*/}
+          <Button color="inherit" onClick={handleLogIn}>Log In</Button>
         </Toolbar>
       </AppBar>
     </div>

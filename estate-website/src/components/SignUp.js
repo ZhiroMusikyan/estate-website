@@ -43,7 +43,7 @@ export default function SignUp(props) {
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" ref={passwordRef} required />
                 </Form.Group>
-                <Button desabled={loading} className="w-100" type="submit">
+                <Button desabled={loading.toString()} className="w-100" type="submit">
                   Sign Up
                 </Button>
               </Form>

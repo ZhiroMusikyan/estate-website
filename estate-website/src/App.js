@@ -90,27 +90,38 @@ import UserPage from "./components/UserPage";
 
 export default function App() {
   const [showLogIn, setShowLogIn] = useState(false);
+  const [name, setName] = useState({});
+
   useEffect(() => {
     const db = firebase.database();
-    console.log('mydb',db);
-  });
-  function handleToggle() {
-    setShowLogIn(!showLogIn);
-  }
+    const name = db.ref("name");
+    name.on("value", (elem) => {
+      setName({ name: elem.val() });
+    });
+
+    console.log("mydb", name);
+  }, []);
+  const loggedIn = localStorage.getItem("userLogIn");
 
   return (
     <>
       <Router>
-      <NavAppBar onClick={handleToggle} />
-          <LogIn />
-      {/*/!*<Dashboard/>*!/*/}
-
-      {/*  <Switch>*/}
-      {/*    <Route  path="/market" component={Dashboard}/>*/}
-      {/*    <Route path="/signup" component={SignUp}/>*/}
-      {/*    <Route path="/userpage" component={UserPage}/>*/}
-      {/*    <Redirect to="/market"/>*/}
-      {/*  </Switch>*/}
+        <NavAppBar />
+        {loggedIn ? (
+        <Switch>
+          <Route path="/login" component={SignUp} />
+          <Route path="/market" component={Dashboard} />
+          {/*<Route path="/signup" component={SignUp} />*/}
+          <Route path="/userpage" component={UserPage} />
+          <Redirect to="/market" />
+        </Switch>
+        ) : (
+            <Switch>
+              <Route path="/market" component={Dashboard} />
+              <Route path="/login" component={LogIn} />
+              <Redirect to="/market" />
+            </Switch>
+        )}
       </Router>
     </>
   );

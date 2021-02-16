@@ -18,7 +18,8 @@ export default function LogIn(props) {
     try {
       setError("");
       setLoading(true);
-      await SignIn(emailRef.current.value, passwordRef.current.value);
+      const request = await SignIn(emailRef.current.value, passwordRef.current.value);
+      localStorage.setItem("userLogIn", true);
       history.push("/userpage");
     } catch {
       setError("failed to log in");
@@ -46,7 +47,7 @@ export default function LogIn(props) {
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" ref={passwordRef} required />
                 </Form.Group>
-                <Button desabled={loading} className="w-100" type="submit">
+                <Button desabled={loading.toString()} className="w-100" type="submit">
                   Log In
                 </Button>
               </Form>
